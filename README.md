@@ -1,3 +1,5 @@
+![The Wheel Deal team logo](https://frc1360.github.io/fll-cityshaper-41927/website/images/wheeldeal-front_640w.png)
+
 # fll-cityshaper-41927
 ## Repository for FLL Team 41927's 2019/2020 City Shaper season.
 
