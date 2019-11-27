@@ -3,3 +3,7 @@ description: "FLL Team #41927 - The Wheel Deal"
 show_downloads: false
 google_analytics:
 theme: jekyll-theme-architect
+exclude:
+  - Gemfile
+  - .gitignore
+  - .jekyll-cache
