@@ -1,3 +1,4 @@
+lang: en-US
 title: The Wheel Deal
 description: "FLL Team #41927 - The Wheel Deal"
 show_downloads: false
@@ -7,3 +8,5 @@ exclude:
   - Gemfile
   - .gitignore
   - .jekyll-cache
+github:
+  is_project_page: true
