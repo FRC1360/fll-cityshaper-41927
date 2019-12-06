@@ -4,7 +4,7 @@ layout: default
 
 # The Wheel Deal
 <br>
-![FLL Team 41927 - The Wheel Deal](assets/images/fll-team-circle.jpg)
+![FLL Team 41927 - The Wheel Deal](assets/images/team_jumping.jpg)
 
 ## About Us
 
