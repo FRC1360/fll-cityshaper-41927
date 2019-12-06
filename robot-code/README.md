@@ -1,2 +1,2 @@
-# fll-cityshaper-41927
-Folder for FLL Team 41927 EV3 code
+# Team 41927 Robot Code
+Folder for FLL Team 41927's EV3 code
