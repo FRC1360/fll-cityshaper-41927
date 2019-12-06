@@ -10,3 +10,4 @@ exclude:
   - .jekyll-cache
 github:
   is_project_page: true
+  repository_url: https://github.com/FRC1360/fll-cityshaper-41927

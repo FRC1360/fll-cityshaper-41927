@@ -17,7 +17,19 @@ footer {
 }
 
 footer a {
+  height: 10rem;
   color: #fff;
+}
+
+footer .inner {
+  height: 5rem;
+}
+
+footer a.button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent url(../images/github-button.png) 0 0 no-repeat;
 }
 
 .banner {
