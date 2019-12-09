@@ -21,15 +21,14 @@ nav {
 
   a {
     font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
-    font-size: 1.5rem;
+    font-size: 1.5em;
     color: #777;
     text-decoration: none;
     transition: all 0.45s;
   }
 
   &:hover {
-    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzOTAiIGhlaWdodD0iNTAiPgogIDxwYXRoIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJlN2JjZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgZD0iTTAsNDcuNmMwLDAsOTcuNSwwLDEzMCwwYzEzLjgsMCwyOC43LTIzLjcsNDYuMi0xMS45YzE2LjUsMTEuMiw2Ny40LDExLjksODMuOCwxMS45YzMxLjgsMCwxMzAsMCwxMzAsMCIvPgo8L3N2Zz4=");
-    animation: line 1s;
+    text-decoration: underline;
   }
 
   &:hover a {
