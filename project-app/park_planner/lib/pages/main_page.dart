@@ -19,7 +19,7 @@ class _MainPageState extends State<MainPage> {
   int selecctedIndex = 0;
 
   List<Widget> views = [Calender(),
-                        Report(),
+                        ReportPage(),
                         AboutUs(),
                         Faq(),
                         ];

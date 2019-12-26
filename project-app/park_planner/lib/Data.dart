@@ -43,6 +43,55 @@ class Data {
 
   }
 
+  static void save() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<String> strUser = new List<String>();
+    for(User u in users) {
+      strUser.add(u.toStorableString());
+    }
+    prefs.setStringList("users", strUser);
+
+    List<String> strParks = new List<String>();
+    for(Park p in parks) {
+      strParks.add(p.toStorableString());
+    }
+    prefs.setStringList("parks", strParks);
+
+    List<String> strEvents = new List<String>();
+    for(ParkEvent e in  events) {
+      strEvents.add(e.toStorableString());
+    }
+    prefs.setStringList("events", strEvents);
+
+    List<String> strReports = new List<String>();
+    for(Report r in reports) {
+      strReports.add(r.toStorableString());
+    }
+    prefs.setStringList("reports", strReports);
+
+  }
+
+  static void addReport(Report r) {
+    reports.add(r);
+    save();
+  }
+
+  static void addUser(User u) {
+    users.add(u);
+    save();
+  }
+
+  static void addPark(Park p) {
+    parks.add(p);
+    save();
+  }
+
+  static void addEvent(ParkEvent e) {
+    events.add(e);
+    save();
+  }
+
   static User getUser(String username) {
     for (User u in users) {
       if(u.username == username) {

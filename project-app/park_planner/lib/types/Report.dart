@@ -7,7 +7,7 @@ class Report {
   User u;
   String report;
 
-  String toSavableString() {
+  String toStorableString() {
     return u.username + Constants.seperator + report;
   }
 
