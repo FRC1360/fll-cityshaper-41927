@@ -41,7 +41,9 @@ class ParkEvent {
     //this.location = dat[1]
     this.description = dat[2];
     this.title = dat[3];
-
+    //this.start = dat[4];
+    List<String> duration = dat[5].split(Constants.durSeperator);
+    this.dur = new Duration(hours: int.tryParse(duration[0]) ?? 0, minutes: int.tryParse(duration[1]) ?? 0);
   }
 
 
