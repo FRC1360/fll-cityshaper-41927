@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import '../Constants.dart';
 import 'Park.dart';
 import 'User.dart';
+import '../Data.dart';
 
 class ParkEvent {
   List<User> attendees;
@@ -20,7 +23,7 @@ class ParkEvent {
           + location.name + Constants.seperator
         + description + Constants.seperator
         + title + Constants.seperator
-        + start.toString() + Constants.seperator
+        + Data.getDateString(start) + Constants.seperator
         + dur.toString() + Constants.seperator;
   }
 
@@ -37,11 +40,11 @@ class ParkEvent {
   }
   ParkEvent.fromString(String eventData) {
     List<String> dat = eventData.split(Constants.seperator);
-    //this.creator = dat[0]
-    //this.location = dat[1]
+    this.creator = Data.getUser(dat[0]) ?? new User(username: "user",password: "pass", fName: "user",lName: "deleted");
+    this.location = Data.getPark(dat[1]) ?? new Park("deleted park", 50 , "deleted");
     this.description = dat[2];
     this.title = dat[3];
-    //this.start = dat[4];
+    this.start = Data.getDateFromString(dat[4]);
     List<String> duration = dat[5].split(Constants.durSeperator);
     this.dur = new Duration(hours: int.tryParse(duration[0]) ?? 0, minutes: int.tryParse(duration[1]) ?? 0);
   }

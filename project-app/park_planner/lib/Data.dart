@@ -1,3 +1,4 @@
+import 'package:park_planner/Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'types/Park.dart';
@@ -52,6 +53,7 @@ class Data {
     //loaded = true;
   }
 
+  
   static void save() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -118,7 +120,17 @@ class Data {
     return null;
   }
   static ParkEvent getEvent(String title) {
-
+  
+  }
+  
+  static String getDateString(DateTime dt) {
+    return dt.day.toString() + Constants.dateSeperator + dt.month.toString() + Constants.dateSeperator + dt.year.toString() + Constants.dateSeperator
+        + dt.hour.toString() + Constants.dateSeperator + dt.minute.toString() + Constants.dateSeperator;
+  }
+  
+  static DateTime getDateFromString(String s) {
+    var dat = s.split(Constants.dateSeperator);
+    return new DateTime(int.tryParse(dat[2]),int.tryParse(dat[1]),int.tryParse(dat[0]),int.tryParse(dat[3]),int.tryParse(dat[4]));
   }
 
 }

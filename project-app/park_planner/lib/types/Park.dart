@@ -1,4 +1,5 @@
 import '../Constants.dart';
+import '../Data.dart';
 
 class Park {
   String address;
@@ -15,6 +16,10 @@ class Park {
      this.address = dat[0];
      this.size = double.tryParse(dat[1])  ?? 0.0;
      this.name = dat[2];
+  }
+
+  bool validate() {
+    return address.isNotEmpty && size >= 0 && name.isNotEmpty && Data.getPark(name) == null;
   }
 
   String toStorableString() {

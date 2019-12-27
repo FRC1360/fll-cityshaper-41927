@@ -5,6 +5,7 @@ import 'calender.dart';
 import 'faq.dart';
 import 'about_us.dart';
 import 'report_page.dart';
+import 'admin_view.dart';
 
 class MainPage extends StatefulWidget {
   User currentuser;
@@ -24,7 +25,8 @@ class _MainPageState extends State<MainPage> {
                         "Calender",
                         "Report",
                         "About Us",
-                        "F and Q"
+                        "F and Q",
+                        "Admin View"
   ];
 
   List<Widget> views = [
@@ -32,6 +34,7 @@ class _MainPageState extends State<MainPage> {
                         ReportPage(),
                         AboutUs(),
                         Faq(),
+                        AdminView()
                         ];
 
   @override
@@ -40,6 +43,7 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(title: Text(titles[selectedIndex]),),
       drawer: Drawer(
         //child: Expanded(
+        //TODO make this into a listview builder
         child: ListView(
           children: <Widget>[
             DrawerHeader(
@@ -48,6 +52,7 @@ class _MainPageState extends State<MainPage> {
                 color: Colors.blue,
               ),
             ),
+
             ListTile(
               title: Text("Calender"),
               onTap: () {
@@ -80,6 +85,15 @@ class _MainPageState extends State<MainPage> {
               onTap: () {
                 setState(() {
                   selectedIndex = 3;
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("AdminView"),
+              onTap: () {
+                setState(() {
+                  selectedIndex = 4;
                 });
                 Navigator.pop(context);
               },

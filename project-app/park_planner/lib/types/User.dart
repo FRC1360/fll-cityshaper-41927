@@ -1,4 +1,5 @@
 import 'package:park_planner/Constants.dart';
+import '../Data.dart';
 
 class User {
   String fName;
@@ -16,6 +17,11 @@ class User {
     this.password = dat[1];
     this.fName = dat[2];
     this.lName = dat[3];
+  }
+
+  //before the user is added to the global users group, ensure that it's unique and valid
+  bool validate() {
+    return username.isNotEmpty && password.isNotEmpty && fName.isNotEmpty && lName.isNotEmpty && Data.getUser(username) == null;
   }
 
   String toStorableString() {
