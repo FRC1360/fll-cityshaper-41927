@@ -48,6 +48,9 @@ class _LoginState extends State<Login> {
         child: Icon(Icons.arrow_forward_ios),
         onPressed: () {
           if(_validate()) {
+            setState(() {
+              Data.currentUser = Data.getUser(user);
+            });
             Navigator.push(
                 context,
                 MaterialPageRoute(
