@@ -57,7 +57,10 @@ class _CalenderPageState extends State<CalenderPage> with TickerProviderStateMix
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           //Text("Event Calender"),
-          _buildTableCalendar(),
+          Container(
+            child: _buildTableCalendar(),
+          ),
+
           _eventList()
 
         ],

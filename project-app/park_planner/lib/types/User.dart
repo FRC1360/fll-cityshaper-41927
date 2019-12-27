@@ -10,6 +10,7 @@ class User {
 
   //bool isAdmin; assuming that creation of parks isn't needed
 
+  User.fromNothing();
   User({this.username,this.password,this.fName,this.lName});
   User.fromString(String userData) {
     List<String> dat = userData.split(Constants.seperator);

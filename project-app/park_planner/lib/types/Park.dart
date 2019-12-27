@@ -18,6 +18,8 @@ class Park {
      this.name = dat[2];
   }
 
+  Park.fromNothing();
+
   bool validate() {
     return address.isNotEmpty && size >= 0 && name.isNotEmpty && Data.getPark(name) == null;
   }

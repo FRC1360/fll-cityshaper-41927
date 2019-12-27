@@ -13,14 +13,21 @@ class AdminView extends StatefulWidget {
 }
 
 class _AdminViewState extends State<AdminView> {
-  User u;
-  Park p;
+
+  String username = "";
+  String pass = "";
+  String fName = "";
+  String lName = "";
+
+  String name = "";
+  String address = "";
+  double size = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: ListView(
+        //crossAxisAlignment: CrossAxisAlignment.center,
+        //mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Card(
             child: Column(children: <Widget>[
@@ -28,7 +35,7 @@ class _AdminViewState extends State<AdminView> {
               TextField(
                 onChanged: (val) {
                   setState(() {
-                    u.username = val.trim();
+                    username = val.trim();
                   });
                 },
               ),
@@ -37,7 +44,7 @@ class _AdminViewState extends State<AdminView> {
               TextField(
                 onChanged: (val) {
                   setState(() {
-                    u.password = val.trim();
+                    pass = val.trim();
                   });
                 },
               ),
@@ -46,7 +53,7 @@ class _AdminViewState extends State<AdminView> {
               TextField(
                 onChanged: (val) {
                   setState(() {
-                    u.fName = val.trim();
+                    fName = val.trim();
                   });
                 },
               ),
@@ -55,7 +62,7 @@ class _AdminViewState extends State<AdminView> {
               TextField(
                 onChanged: (val) {
                   setState(() {
-                    u.lName = val.trim();
+                    lName = val.trim();
                   });
                 },
               ),
@@ -63,12 +70,24 @@ class _AdminViewState extends State<AdminView> {
               RaisedButton(
                 child: Text("Add User"),
                 onPressed: () {
-                  if(u.validate()) {
+                  if(username.isNotEmpty && pass.isNotEmpty && fName.isNotEmpty && lName.isNotEmpty && Data.getUser(username) == null) {
                     setState(() {
-                      Data.addUser(u);
+                      Data.addUser(new User(username: username,password: pass,fName: fName,lName: lName));
                     });
                   }
                 },
+              ),
+              SizedBox(height: 30,),
+
+              SizedBox(
+                height: 200,
+                child: ListView.builder(
+                    itemCount: Data.users.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                          title: Text(Data.users[index].username + " -> " + Data.users[index].fName + " " + Data.users[index].lName)
+                      );
+                    }),
               )
             ],),
           ),
@@ -78,7 +97,7 @@ class _AdminViewState extends State<AdminView> {
               TextField(
                 onChanged: (val) {
                   setState(() {
-                    p.name = val.trim();
+                    name = val.trim();
                   });
                 },
               ),
@@ -87,7 +106,7 @@ class _AdminViewState extends State<AdminView> {
               TextField(
                 onChanged: (val) {
                   setState(() {
-                    p.address = val.trim();
+                    address = val.trim();
                   });
                 },
               ),
@@ -97,7 +116,7 @@ class _AdminViewState extends State<AdminView> {
                 keyboardType: TextInputType.number,
                 onChanged: (val) {
                   setState(() {
-                    p.size = int.tryParse(val.trim()) ?? -1;
+                    size = int.tryParse(val.trim()) ?? -1;
                   });
                 },
               ),
@@ -105,14 +124,28 @@ class _AdminViewState extends State<AdminView> {
               RaisedButton(
                 child: Text("Add Park"),
                 onPressed: () {
-                  if(p.validate()) {
+                  if(name.isNotEmpty && address.isNotEmpty && size > -1 && Data.getPark(name) == null) {
                     setState(() {
-                      Data.addPark(p);
+                      Data.addPark(new Park(address,size,name));
                     });
                   }
                 },
+              ),
+
+              SizedBox(height: 30,),
+
+              SizedBox(
+                height: 200,
+                child: ListView.builder(
+                    itemCount: Data.parks.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                          title: Text(Data.parks[index].name)
+                      );
+                    })
               )
             ],),
+
           )
 
 
