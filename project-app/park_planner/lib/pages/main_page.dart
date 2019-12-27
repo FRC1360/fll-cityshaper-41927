@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:park_planner/types/Event.dart';
 import '../Data.dart';
 import '../types/User.dart';
+import '../types/Park.dart';
 import 'calender.dart';
 import 'faq.dart';
 import 'about_us.dart';
@@ -22,11 +23,16 @@ class _MainPageState extends State<MainPage> {
 
   _MainPageState(User u) {
     currentUser = u;
-    e = new ParkEvent.fromCreator(currentUser);
+    //e = new ParkEvent.fromCreator(currentUser);
   }
   User currentUser;
   int selectedIndex = 0;
-  ParkEvent e;
+  //ParkEvent e;
+  String title = "";
+  String desc = "";
+  DateTime start;
+  Duration dur;
+  Park loc;
 
   List<String> titles = [
                         "Calender",
@@ -137,7 +143,7 @@ class _MainPageState extends State<MainPage> {
         TextField(
           onChanged: (val) {
             setState(() {
-              e.title = val.trim();
+              title = val.trim();
             });
           },
         ),
@@ -146,7 +152,7 @@ class _MainPageState extends State<MainPage> {
         TextField(
           onChanged: (val) {
             setState(() {
-              e.description = val.trim();
+              desc = val.trim();
             });
           },
         ),
@@ -155,7 +161,7 @@ class _MainPageState extends State<MainPage> {
         TextField(
           onChanged: (val) {
             setState(() {
-              e.location = Data.getPark(val.trim()) ?? null;
+              loc = Data.getPark(val.trim()) ?? null;
             });
           },
         ),
@@ -165,7 +171,7 @@ class _MainPageState extends State<MainPage> {
           onChanged: (val) {
             setState(() {
               var dat = val.trim().split(":");
-              e.start = new DateTime(Data.selectedDate.year,Data.selectedDate.month,Data.selectedDate.day,int.tryParse(dat[0]), int.tryParse(dat[1]));
+              start = new DateTime(Data.selectedDate.year,Data.selectedDate.month,Data.selectedDate.day,int.tryParse(dat[0]), int.tryParse(dat[1]));
             });
           },
         ),
@@ -175,18 +181,18 @@ class _MainPageState extends State<MainPage> {
           onChanged: (val) {
             setState(() {
               var dat = val.trim().split(":");
-              e.dur = new Duration(hours: int.tryParse(dat[0]), minutes: int.tryParse(dat[1]));
+              dur = new Duration(hours: int.tryParse(dat[0]), minutes: int.tryParse(dat[1]));
             });
           },
         ),
 
         RaisedButton(
           onPressed: () {
-            if(e.validate()) {
+            if(title.isNotEmpty && desc.isNotEmpty && Data.getEvent(title) == null) {
               setState(() {
-                Data.addEvent(e);
+                Data.addEvent(new ParkEvent(currentUser, loc, desc,title,start,dur));
               });
-
+              Navigator.pop(context);
             }
           },
         )

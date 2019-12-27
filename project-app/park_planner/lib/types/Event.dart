@@ -26,15 +26,7 @@ class ParkEvent {
         + Data.getDateString(start) + Constants.seperator
         + dur.toString() + Constants.seperator;
   }
-
-  bool validate() {
-    return Data.getUser(creator.username) != null && Data.getPark(location.name) != null && title.isNotEmpty && description.isNotEmpty;
-  }
-
-  ParkEvent.fromCreator(User u) {
-    this.creator = u;
-  }
-
+  
   ParkEvent(User c, Park l, String desc, String title, DateTime dt, Duration duration) {
     creator = c;
     location = l;
@@ -55,6 +47,8 @@ class ParkEvent {
     this.start = Data.getDateFromString(dat[4]);
     List<String> duration = dat[5].split(Constants.durSeperator);
     this.dur = new Duration(hours: int.tryParse(duration[0]) ?? 0, minutes: int.tryParse(duration[1]) ?? 0);
+
+
   }
 
 

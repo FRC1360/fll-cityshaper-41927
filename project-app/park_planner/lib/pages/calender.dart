@@ -25,9 +25,13 @@ class _CalenderPageState extends State<CalenderPage> with TickerProviderStateMix
   @override
   void initState() {
     super.initState();
+    print("calender init");
 
     for(ParkEvent e in Data.events) {
+      print(e.title);
+      if(_events[e.start] == null) _events[e.start] = new List();
       _events[e.start].add(e);
+
     }
 
     Data.selectedEvents = _events[DateTime.now()] ?? [];
