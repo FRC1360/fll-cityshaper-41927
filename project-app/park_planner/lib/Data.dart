@@ -13,34 +13,43 @@ class Data {
 
   static bool loaded = false;
 
-  static void getAll() async {
+  static Future<bool> getAll() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-
-    List<String> strUsers = prefs.getStringList("users") ?? new List<String>();
-    for(String s in strUsers) {
-      users.add(new User.fromString(s));
+    print("1");
+    if(prefs.containsKey("users")) {
+      List<String> strUsers = prefs.getStringList("users") ?? new List<String>();
+      for(String s in strUsers) {
+        users.add(new User.fromString(s));
+      }
     }
 
-    List<String> strParks = prefs.getStringList("parks") ?? new List<String>();
-    for(String s in strParks) {
-      parks.add(new Park.fromString(s));
+    print("2");
+    if(prefs.containsKey("parks")) {
+      List<String> strParks = prefs.getStringList("parks") ?? new List<String>();
+      for(String s in strParks) {
+        parks.add(new Park.fromString(s));
+      }
     }
 
-    List<String> strEvents = prefs.getStringList("events") ?? new List<String>();
-    for(String s in strEvents) {
-      events.add(new ParkEvent.fromString(s));
+    print("3");
+    if(prefs.containsKey("events")) {
+      List<String> strEvents = prefs.getStringList("events") ?? new List<String>();
+      for(String s in strEvents) {
+        events.add(new ParkEvent.fromString(s));
+      }
     }
 
-    List<String> strReports = prefs.getStringList("reports") ?? new List<String>();
-    for(String s in strReports) {
-      reports.add(new Report.fromString(s));
+    print("4");
+    if(prefs.containsKey("reports")) {
+      List<String> strReports = prefs.getStringList("reports") ?? new List<String>();
+      for(String s in strReports) {
+        reports.add(new Report.fromString(s));
+      }
     }
-
-      //return true;
-    loaded = true;
-
-
+    print("5");
+      return true;
+    //loaded = true;
   }
 
   static void save() async {

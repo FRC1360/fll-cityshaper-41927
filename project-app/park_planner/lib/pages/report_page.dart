@@ -24,6 +24,7 @@ class _ReportState extends State<ReportPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
+          SizedBox(height: 60.0,),
           Text("If you meet an error or find a problem with our service, please leave a report below"),
           TextField(onChanged: (val) {
             setState(() {
@@ -42,7 +43,16 @@ class _ReportState extends State<ReportPage> {
                   });
                 }
             },
-          )
+          ),
+          Expanded(
+          child: ListView.builder(
+              itemCount: Data.reports.length,
+              itemBuilder:  (context, index) {
+                return ListTile(
+                  title: Text(Data.reports[index].report),
+                );
+              }
+          ))
         ],
       ),
     );

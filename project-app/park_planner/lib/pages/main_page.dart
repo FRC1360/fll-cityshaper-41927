@@ -7,18 +7,28 @@ import 'about_us.dart';
 import 'report_page.dart';
 
 class MainPage extends StatefulWidget {
-  MainPage({Key key}) : super(key: key);
+  User currentuser;
+  MainPage(this.currentuser);
 
   @override
-  _MainPageState createState() => _MainPageState();
+  _MainPageState createState() => _MainPageState(currentuser);
 }
 
 class _MainPageState extends State<MainPage> {
 
+  _MainPageState(this.currentUser);
   User currentUser;
-  int selecctedIndex = 0;
+  int selectedIndex = 0;
 
-  List<Widget> views = [Calender(),
+  List<String> titles = [
+                        "Calender",
+                        "Report",
+                        "About Us",
+                        "F and Q"
+  ];
+
+  List<Widget> views = [
+                        CalenderPage(),
                         ReportPage(),
                         AboutUs(),
                         Faq(),
@@ -27,7 +37,9 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text(titles[selectedIndex]),),
       drawer: Drawer(
+        //child: Expanded(
         child: ListView(
           children: <Widget>[
             DrawerHeader(
@@ -40,7 +52,7 @@ class _MainPageState extends State<MainPage> {
               title: Text("Calender"),
               onTap: () {
                 setState(() {
-                  selecctedIndex = 0;
+                  selectedIndex = 0;
                 });
                 Navigator.pop(context);
               },
@@ -49,7 +61,7 @@ class _MainPageState extends State<MainPage> {
               title: Text("Report"),
               onTap: () {
                 setState(() {
-                  selecctedIndex = 1;
+                  selectedIndex = 1;
                 });
                 Navigator.pop(context);
               },
@@ -58,7 +70,7 @@ class _MainPageState extends State<MainPage> {
               title: Text("About Us"),
               onTap: () {
                 setState(() {
-                  selecctedIndex = 2;
+                  selectedIndex = 2;
                 });
                 Navigator.pop(context);
               },
@@ -67,15 +79,36 @@ class _MainPageState extends State<MainPage> {
               title: Text("FAQ"),
               onTap: () {
                 setState(() {
-                  selecctedIndex = 3;
+                  selectedIndex = 3;
                 });
                 Navigator.pop(context);
               },
             ),
           ],
-        ),
+        )//),
       ),
-      body: views[selecctedIndex],
+      body: Column(children: <Widget>[
+
+        Expanded(child: views[selectedIndex]),
+      ],),
+      floatingActionButton: fab(),
     );
+  }
+
+  Widget fab() {
+    if(selectedIndex == 0) {
+      return FloatingActionButton(
+        child: Icon(Icons.add),
+        heroTag: "fab_cal",
+        onPressed: _showAddEvent,
+      );
+    }
+    else {
+      return null;
+    }
+  }
+
+  void _showAddEvent() {
+    showBottomSheet(context: context, builder: null);
   }
 }
