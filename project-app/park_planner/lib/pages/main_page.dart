@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+
+import 'package:park_planner/types/Event.dart';
+import '../Data.dart';
 import '../types/User.dart';
 import 'calender.dart';
 import 'faq.dart';
@@ -17,9 +20,13 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
 
-  _MainPageState(this.currentUser);
+  _MainPageState(User u) {
+    currentUser = u;
+    e = new ParkEvent.fromCreator(currentUser);
+  }
   User currentUser;
   int selectedIndex = 0;
+  ParkEvent e;
 
   List<String> titles = [
                         "Calender",
@@ -122,7 +129,69 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
+
   void _showAddEvent() {
-    showBottomSheet(context: context, builder: null);
+    showModalBottomSheet(context: context, builder: (context) => Column(
+      children: <Widget>[
+        Text("Title:"),
+        TextField(
+          onChanged: (val) {
+            setState(() {
+              e.title = val.trim();
+            });
+          },
+        ),
+
+        Text("Description:"),
+        TextField(
+          onChanged: (val) {
+            setState(() {
+              e.description = val.trim();
+            });
+          },
+        ),
+
+        Text("Park:"),
+        TextField(
+          onChanged: (val) {
+            setState(() {
+              e.location = Data.getPark(val.trim()) ?? null;
+            });
+          },
+        ),
+
+        Text("Start Time:"),
+        TextField(
+          onChanged: (val) {
+            setState(() {
+              var dat = val.trim().split(":");
+              e.start = new DateTime(Data.selectedDate.year,Data.selectedDate.month,Data.selectedDate.day,int.tryParse(dat[0]), int.tryParse(dat[1]));
+            });
+          },
+        ),
+
+        Text("Duration:"),
+        TextField(
+          onChanged: (val) {
+            setState(() {
+              var dat = val.trim().split(":");
+              e.dur = new Duration(hours: int.tryParse(dat[0]), minutes: int.tryParse(dat[1]));
+            });
+          },
+        ),
+
+        RaisedButton(
+          onPressed: () {
+            if(e.validate()) {
+              setState(() {
+                Data.addEvent(e);
+              });
+
+            }
+          },
+        )
+
+      ],
+    ));
   }
 }

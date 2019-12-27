@@ -14,6 +14,9 @@ class Data {
 
   static bool loaded = false;
 
+  static List selectedEvents;
+  static DateTime selectedDate;
+
   static Future<bool> getAll() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 

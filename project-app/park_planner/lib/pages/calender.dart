@@ -19,8 +19,6 @@ class CalenderPage extends StatefulWidget {
 class _CalenderPageState extends State<CalenderPage> with TickerProviderStateMixin {
 
   Map<DateTime, List> _events = new Map<DateTime, List>();
-  List _selectedEvents;
-  DateTime _selectedDate;
   AnimationController _animationController;
   CalendarController _calendarController;
 
@@ -32,7 +30,7 @@ class _CalenderPageState extends State<CalenderPage> with TickerProviderStateMix
       _events[e.start].add(e);
     }
 
-    _selectedEvents = _events[DateTime.now()] ?? [];
+    Data.selectedEvents = _events[DateTime.now()] ?? [];
     _calendarController = CalendarController();
 
     _animationController = AnimationController(
@@ -70,10 +68,10 @@ class _CalenderPageState extends State<CalenderPage> with TickerProviderStateMix
   Widget _eventList() {
     return Expanded(
         child: ListView.builder(
-        itemCount: _selectedEvents.length,
+        itemCount: Data.selectedEvents.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(_selectedEvents[index].title),
+            title: Text(Data.selectedEvents[index].title),
             onTap: null,
 
           );
@@ -88,8 +86,8 @@ class _CalenderPageState extends State<CalenderPage> with TickerProviderStateMix
   void _onDaySelected(DateTime day, List events) {
     print('CALLBACK: _onDaySelected');
     setState(() {
-      _selectedDate = day;
-      _selectedEvents = events;
+      Data.selectedDate = day;
+      Data.selectedEvents = events;
     });
   }
 

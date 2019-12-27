@@ -27,6 +27,14 @@ class ParkEvent {
         + dur.toString() + Constants.seperator;
   }
 
+  bool validate() {
+    return Data.getUser(creator.username) != null && Data.getPark(location.name) != null && title.isNotEmpty && description.isNotEmpty;
+  }
+
+  ParkEvent.fromCreator(User u) {
+    this.creator = u;
+  }
+
   ParkEvent(User c, Park l, String desc, String title, DateTime dt, Duration duration) {
     creator = c;
     location = l;
